@@ -2,9 +2,10 @@
 
 ### Nielsen HomeScan Data and Household **SOW**
 * The Nielsen HomeScan Panel is designed with the intent of illuminating the full spectrum of the customer’s retail behavior.  Nielsen incentives panel members to log all of their retail purchases using an at home scanning device.  
-* Kroger Household **SOW** is the proportion a customer spends at Kroger relative to household's total retail spend.  Typically, commodity filters are applied to keep the **SOW** relevant to the referential retailer (Kroger).  Kroger is primarly concerned with selling grocies, so we filter the universe of potential       
+* Kroger Household **SOW** is the proportion a customer spends at Kroger relative to household's total retail spend.  Typically, commodity filters are applied to keep the **SOW** relevant to the referential retailer (Kroger).  Kroger is primarly concerned with selling groceries, so we filter the universe of potential items to reflect Kroger's interest.       
 
-
+### Why Do we need to Build a Model to Predict **SOW**?
+* The Nielsen HomeScan Panel contains ~50,000 Kroger-shopping members.  To calculate **SOW** for those 50K shoppers is a trivial task, divide a household's total Kroger spend by the household's overall total spend.   , However we would like to know **SOW** for every active Kroger Household.  Since we know how much Kroger Households spend at Kroger, if we
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
 ### Theoretical background on regularized regression and glmnet tutorials can be found below:
