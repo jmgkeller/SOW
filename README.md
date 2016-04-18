@@ -5,7 +5,11 @@
 * Kroger Household **SOW** is the proportion a customer spends at Kroger relative to household's total retail spend.  Typically, commodity filters are applied to keep the **SOW** relevant to the referential retailer (Kroger).  Kroger is primarly concerned with selling groceries, so we filter the universe of potential items to reflect Kroger's interest.       
 
 ### Why Do we need to Build a Model to Predict **SOW**?
-* The Nielsen HomeScan Panel contains ~50,000 Kroger-shopping members.  To calculate **SOW** for those 50K shoppers is a trivial task, divide a household's total Kroger spend by the household's overall total spend.   , However we would like to know **SOW** for every active Kroger Household.  Since we know how much Kroger Households spend at Kroger, if we
+* The Nielsen HomeScan Panel contains ~50,000 Kroger-shopping members.  To calculate **SOW** for those 50K shoppers is a trivial task, divide a household's total Kroger spend by the household's overall total spend.  However, we would like to know **SOW** for every active Kroger Household.  
+* Since we know how much Kroger Households spend at Kroger, if we can reliablely estimate how much Kroger households spend outside of Kroger, then we will have a good estimate for **SOW**
+* We use Kroger behavioral, segmentation, and demographic data from the 84.51° Common Data Model (**CDM**) to predict Rest-of-Market (**ROM**)spend (i.e., spend outside of Kroger) for Kroger-shopping Nielsen Panel Members.  We then extrapolate the model parameters to predict **ROM** spend for all active Kroger shoppers.
+ 
+
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
 ### Theoretical background on regularized regression and glmnet tutorials can be found below:
