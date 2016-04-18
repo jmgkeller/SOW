@@ -14,11 +14,13 @@
   1. The household must be consider a "good reporter" by Nielsen and Kroger standards, meaning the household uses thier scanner on a regular basis (a minimum of at least one scanned item per Kroger period from any retailer in 22 of the past 26 Kroger periods)
   2. The household must have scanned at least one item from Kroger in the Past year
   3. The household's Nielsen reported Kroger spend for the past year must be between -$250 and $500 from the household's **CDM** Kroger spend 
-2. Apllying the above reduces ~50,000 Kroger-shopping Nielsen Panel Members to about 5,000 reliable panel members.  We make the assumption that the 5K Kroger-shopping Nielsen Panel Members accurately reported their **ROM** spend because they accurately reported thier Kroger spend.  We create the dependent variable for the **SOW** model by aggrateing **ROM** spend for each household over the past year.
+2. Apllying the above reduces ~50,000 Kroger-shopping Nielsen Panel Members to about 6,000 reliable panel members.  We make the assumption that the 6K Kroger-shopping Nielsen Panel Members accurately reported their **ROM** spend because they accurately reported thier Kroger spend.  We create the dependent variable for the **SOW** model by aggrateing **ROM** spend for each household over the past year.
 3. The below features are created by for the households in the modeling population:
   1. Household KPIs at various product aggragations (commodity, recap, overall) over the last year, 6 Kroger periods, 3 Kroger periods, and last Kroger period.
   2. Segmentation variables: Shabit, Mylife, PriceBand, and Prefered Store Division as of the most recent day in the analysis period
   3. PeachTree Demographic data: Household Size, Head of Household Age, Income Range
+4. We use a Lasso Regression with ~40,000 features from the **CDM** to predict **ROM** spend
+5. Use the non-zero lasso coefficients to score non-Nielsen households.  Divide **CDM** Kroger spend for the past 52 weeks by total spend for the most recent year (modeled Rest-of-Market spend + **CDM** Kroger spend) 
 
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
