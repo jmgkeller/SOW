@@ -9,11 +9,16 @@
 * Since we know how much Kroger Households spend at Kroger, if we can reliablely estimate how much Kroger households spend outside of Kroger, then we will have a good estimate for **SOW**
 * We use Kroger behavioral, segmentation, and demographic data from the 84.51° Common Data Model (**CDM**) to predict Rest-of-Market (**ROM**)spend (i.e., spend outside of Kroger) for Kroger-shopping Nielsen Panel Members.  We then extrapolate the model parameters to predict **ROM** spend for all active Kroger shoppers.
 
-### Step by Step: How to build a model to predict **SOW**
+### Step by Step: How we build the Lasso model to predict **SOW**
 1. We only want to use reliable Nielsen HomeScan Panel members when we build our model because would like our model to generalize well to the entire Kroger Household universe.  Three Filters are applied to the Nielsen HomeScan Panel Members prior to included in the household level **SOW** model.
-  1. The household must be consider a "good reporter" by Nielsen and Kroger standards, meaning the household uses thier scanner on a regular basis (a minimum of at least one scanned item from any retailer in 22 of the past 26 Kroger periods)
+  1. The household must be consider a "good reporter" by Nielsen and Kroger standards, meaning the household uses thier scanner on a regular basis (a minimum of at least one scanned item per Kroger period from any retailer in 22 of the past 26 Kroger periods)
   2. The household must have scanned at least one item from Kroger in the Past year
   3. The household's Nielsen reported Kroger spend for the past year must be between -$250 and $500 from the household's **CDM** Kroger spend 
+2. Apllying the above reduces ~50,000 Kroger-shopping Nielsen Panel Members to about 5,000 reliable panel members.  We make the assumption that the 5K Kroger-shopping Nielsen Panel Members accurately reported their **ROM** spend because they accurately reported thier Kroger spend.  We create the dependent variable for the **SOW** model by aggrateing **ROM** spend for each household over the past year.
+3. The below features are created by for the households in the modeling population:
+  1. Household KPIs at various product aggragations (commodity, recap, overall) over the last year, 6 Kroger periods, 3 Kroger periods, and last Kroger period.
+  2. Segmentation variables: Shabit, Mylife, PriceBand, and Prefered Store Division as of the most recent day in the analysis period
+  3. PeachTree Demographic data: Household Size, Head of Household Age, Income Range
 
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
