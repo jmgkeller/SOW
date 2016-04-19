@@ -12,7 +12,7 @@
 ### Step by Step: How we build the Lasso model to predict **SOW**
 1. We only want to use reliable Nielsen HomeScan Panel members when we build our model because would like our model to generalize well to the entire Kroger Household universe.  Three Filters are applied to the Nielsen HomeScan Panel Members prior to included in the household level **SOW** model.
   1. The household must be consider a "good reporter" by Nielsen and Kroger standards, meaning the household uses thier scanner on a regular basis (a minimum of at least one scanned item per Kroger period from any retailer in 22 of the past 26 Kroger periods)
-  2. The household must have scanned at least one item from Kroger in the Past year
+  2. The household must have HomeScanned at least one item from Kroger in the Past year
   3. The household's Nielsen reported Kroger spend for the past year must be between -$250 and $500 from the household's **CDM** Kroger spend 
 2. Apllying the above reduces ~50,000 Kroger-shopping Nielsen Panel Members to about 6,000 reliable panel members.  We make the assumption that the 6K Kroger-shopping Nielsen Panel Members accurately reported their **ROM** spend because they accurately reported thier Kroger spend.  We create the dependent variable for the **SOW** model by aggrateing **ROM** spend for each household over the past year.
 3. The below features are created by for the households in the modeling population:
