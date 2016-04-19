@@ -20,7 +20,7 @@
   2. Segmentation variables: Shabit, Mylife, PriceBand, and Prefered Store Division as of the most recent day in the analysis period
   3. PeachTree Demographic data: Household Size, Head of Household Age, Income Range
 4. We use a Lasso Regression with ~40,000 features from the **CDM** to predict **ROM** spend
-5. Use the non-zero lasso coefficients to score non-Nielsen households.  Divide **CDM** Kroger spend for the past 52 weeks by total spend for the most recent year (modeled Rest-of-Market spend + **CDM** Kroger spend) 
+5. Use the non-zero lasso coefficients to score non-Nielsen households.  Divide **CDM** Kroger spend for the past year by total spend for the most recent year (modeled Rest-of-Market spend + **CDM** Kroger spend) 
 
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
