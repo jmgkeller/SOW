@@ -1,27 +1,3 @@
-# Estimating Kroger Household Share of Wallet **(SOW)** Using Lasso Regression and Nielsen HomeScan Panel Data
-
-### Nielsen HomeScan Data and Household **SOW**
-* The Nielsen HomeScan Panel is designed with the intent of illuminating the full spectrum of the customer’s retail behavior.  Nielsen incentives panel members to log all of their retail purchases using an at home scanning device.  
-* Kroger Household **SOW** is the proportion a customer spends at Kroger relative to household's total retail spend.  Typically, commodity filters are applied to keep the **SOW** relevant to the referential retailer (Kroger).  Kroger is primarly concerned with selling groceries, so we filter the universe of potential items to reflect Kroger's interest.       
-
-### Why Do we need to Build a Model to Predict **SOW**?
-* The Nielsen HomeScan Panel contains ~50,000 Kroger-shopping members.  To calculate **SOW** for those 50K shoppers is a trivial task, divide a household's total Kroger spend by the household's overall total spend.  However, we would like to know **SOW** for every active Kroger Household.  
-* Since we know how much Kroger Households spend at Kroger, if we can reliablely estimate how much Kroger households spend outside of Kroger, then we will have a good estimate for **SOW**
-* We use Kroger behavioral, segmentation, and demographic data from the 84.51° Common Data Model (**CDM**) to predict Rest-of-Market (**ROM**)spend (i.e., spend outside of Kroger) for Kroger-shopping Nielsen Panel Members.  We then extrapolate the model parameters to predict **ROM** spend for all active Kroger shoppers.
-
-### Step by Step: How we build the Lasso model to predict **SOW**
-1. We only want to use reliable Nielsen HomeScan Panel members when we build our model because would like our model to generalize well to the entire Kroger Household universe.  Three Filters are applied to the Nielsen HomeScan Panel Members prior to included in the household level **SOW** model.
-  1. The household must be consider a "good reporter" by Nielsen and Kroger standards, meaning the household uses thier scanner on a regular basis (a minimum of at least one scanned item per Kroger period from any retailer in 22 of the past 26 Kroger periods)
-  2. The household must have HomeScanned at least one item from Kroger in the Past year
-  3. The household's Nielsen reported Kroger spend for the past year must be between -$250 and $500 from the household's **CDM** Kroger spend 
-2. Apllying the above reduces ~50,000 Kroger-shopping Nielsen Panel Members to about 6,000 reliable panel members.  We make the assumption that the 6K Kroger-shopping Nielsen Panel Members accurately reported their **ROM** spend because they accurately reported thier Kroger spend.  We create the dependent variable for the **SOW** model by aggrateing **ROM** spend for each household over the past year.
-3. The below features are created by for the households in the modeling population:
-  1. Household KPIs at various product aggragations (commodity, recap, overall) over the last year, 6 Kroger periods, 3 Kroger periods, and last Kroger period.
-  2. Segmentation variables: Shabit, Mylife, PriceBand, and Prefered Store Division as of the most recent day in the analysis period
-  3. PeachTree Demographic data: Household Size, Head of Household Age, Income Range
-4. We use a Lasso Regression with ~40,000 features from the **CDM** to predict **ROM** spend
-5. Use the non-zero lasso coefficients to score non-Nielsen households.  Divide **CDM** Kroger spend for the past year by total spend for the most recent year (modeled Rest-of-Market spend + **CDM** Kroger spend) 
-
 **glmnet** is R packeage written by Jerome Friedman, Trevor Hastie, Noah Simon, and Rob Tibshirani that allows for easy application of regularized generalized linear models to data.  
 
 ### Theoretical background on regularized regression and glmnet tutorials can be found below:
